@@ -1,13 +1,13 @@
-package ie.cyberskills.test.controller;
+package ie.cyberskills.application.controller;
 
 
-import ie.cyberskills.test.entity.Student;
-import ie.cyberskills.test.repository.StudentRepository;
+import ie.cyberskills.application.entity.Student;
+import ie.cyberskills.application.repository.StudentRepository;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import ie.cyberskills.test.exception.ResourceNotFoundException;
+import ie.cyberskills.application.exception.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

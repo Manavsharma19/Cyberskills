@@ -1,10 +1,10 @@
-package ie.cyberskills.test.controller;
+package ie.cyberskills.application.controller;
 
 
-import ie.cyberskills.test.entity.Course;
-import ie.cyberskills.test.exception.ResourceNotFoundException;
-import ie.cyberskills.test.repository.CourseRepository;
-import ie.cyberskills.test.repository.StudentRepository;
+import ie.cyberskills.application.entity.Course;
+import ie.cyberskills.application.exception.ResourceNotFoundException;
+import ie.cyberskills.application.repository.CourseRepository;
+import ie.cyberskills.application.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

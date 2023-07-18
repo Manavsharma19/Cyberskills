@@ -1,4 +1,4 @@
-package ie.cyberskills.test.exception;
+package ie.cyberskills.application.exception;
 
 import java.util.Date;
 

@@ -1,4 +1,4 @@
-package ie.cyberskills.test;
+package ie.cyberskills.application;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

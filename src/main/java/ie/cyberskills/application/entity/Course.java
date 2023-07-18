@@ -1,4 +1,4 @@
-package ie.cyberskills.test.entity;
+package ie.cyberskills.application.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
