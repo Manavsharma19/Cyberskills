@@ -1,6 +1,6 @@
-package ie.cyberskills.test.repository;
+package ie.cyberskills.application.repository;
 
-import ie.cyberskills.test.entity.Course;
+import ie.cyberskills.application.entity.Course;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
