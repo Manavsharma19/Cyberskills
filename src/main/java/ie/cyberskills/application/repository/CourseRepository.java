@@ -12,7 +12,7 @@ import java.util.List;
 @Transactional
 public interface CourseRepository extends JpaRepository<Course, Long> {
 
-    List<Course> findByStudentId(Long courseId);
+    List<Course> findByStudentId(Long studentId);
 
     void deleteByStudentId(Long studentId);
 }
