@@ -22,6 +22,8 @@ import ie.cyberskills.application.repository.CourseRepository;
 @SpringBootTest
 @ExtendWith(MockitoExtension.class)
 class TestApplicationTests {
+	//StudentRepositroy.java Testing
+
 	//We initalize the repositry as a mock to simulate its behavior down the road
     @Mock
     private StudentRepository studentRepository;
@@ -42,6 +44,8 @@ class TestApplicationTests {
 		//We use assertion to check if the expected result is the same as the result we made
         Assertions.assertEquals(2, result.size());
     }
+	//CourseRepository.java Testing
+
 	//We initalize the repositry as a mock to simulate its behavior down the road
 	@Mock
 	private CourseRepository courseRepository;
@@ -67,5 +71,18 @@ class TestApplicationTests {
 		//we compare the expected result with the result we got from using findByStudentId
 		Assertions.assertEquals(2, result.size());
 	}
-
+	//Testing deleteByStudentId, checking if removing a student works.
+	@Test
+	void testDeleteByStudentId(){
+		//creating studentId for look up
+		long studentId = 188979;
+		//we mock the course repository call for deleteByStudentId and use studentId to remove a specific student
+		courseRepository.deleteByStudentId(studentId);
+		//we verify that the delete function worked by searching up said student by id in the system
+		when(courseRepository.findByStudentId(studentId)).thenReturn(new ArrayList<>());
+		//we store the result of the outcome into result
+		List<Course> result = courseRepository.findByStudentId(studentId);
+		//we check the expect vs the result to see if its the same
+		Assertions.assertEquals(0, result.size());
+	}
 }
