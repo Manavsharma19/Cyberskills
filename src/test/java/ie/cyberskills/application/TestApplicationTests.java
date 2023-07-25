@@ -44,6 +44,30 @@ class TestApplicationTests {
 		//We use assertion to check if the expected result is the same as the result we made
         Assertions.assertEquals(2, result.size());
     }
+
+	@Test
+	void testFindByStudentNameContaining(){
+		//Target student name to be looked up
+		String targetName = "Ma";
+		//Using List to mock a database
+		List<Student> students = new ArrayList<>();
+		//Making to students to be added to the list
+        students.add(new Student("Maksims Kazoha", "9 inis allain Bandon", "086 394 5665", true));
+        students.add(new Student("Manav Sharma", "6969 main st bandon", "086 283 3931", true));
+		students.add(new Student("Shamim Hasan", "4214 main st cork", "086 523 5312", true));
+		
+		when(studentRepository.findByStudentNameContaining(targetName)).thenReturn(students);
+		List<Student> result = studentRepository.findByStudentNameContaining(targetName);
+		System.out.println(students);
+		System.out.println("Actual Result:");
+		for (Student student : result) {
+			System.out.println(student.getStudentName());
+		}
+
+		Assertions.assertEquals(1, result.size());
+	}
+
+
 	//CourseRepository.java Testing
 
 	//We initalize the repositry as a mock to simulate its behavior down the road
@@ -55,7 +79,7 @@ class TestApplicationTests {
 	@Test
 	void testFindByStudentId(){
 		//we require CourseId for creating courses and decided to make two
-		long courseId1 = 31202L;
+		long courseId1 = 31202;
 		long courseId2 = 31102;
 		//we also need a student id for looking up a student
 		long studentId = 188979;
