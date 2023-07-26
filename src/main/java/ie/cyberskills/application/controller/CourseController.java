@@ -1,6 +1,8 @@
 package ie.cyberskills.application.controller;
 
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ie.cyberskills.application.entity.Course;
 import ie.cyberskills.application.exception.ResourceNotFoundException;
 import ie.cyberskills.application.repository.CourseRepository;
@@ -17,6 +19,9 @@ import java.util.List;
 @RequestMapping("/api")
 public class CourseController {
 
+    private static final Logger logger = LoggerFactory.getLogger(CourseController.class);
+
+
     @Autowired
     private StudentRepository studentRepository;
 
@@ -25,7 +30,10 @@ public class CourseController {
 
     @GetMapping("/students/{studentId}/courses")
     public ResponseEntity<List<Course>> getAllCoursesByStudentId(@PathVariable(value = "studentId") Long studentId) {
+
         if (!studentRepository.existsById(studentId)) {
+            logger.warn("Not found Student with id = {}", studentId);
+
             throw new ResourceNotFoundException("Not found Student with id = " + studentId);
         }
 
@@ -54,6 +62,9 @@ public class CourseController {
 
     @PutMapping("/courses/{id}")
     public ResponseEntity<Course> updateCourse(@PathVariable("id") long id, @RequestBody Course courseRequest) {
+        logger.info("New course created for student with id = {}", id);
+
+
         Course course = courseRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("CourseId " + id + "not found"));
 
@@ -65,6 +76,8 @@ public class CourseController {
 
     @DeleteMapping("/courses/{id}")
     public ResponseEntity<HttpStatus> deleteCourse(@PathVariable("id") long id) {
+        logger.info("Course deleted with id = {}", id);
+
         courseRepository.deleteById(id);
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -72,11 +85,18 @@ public class CourseController {
 
     @DeleteMapping("/students/{studentId}/courses")
     public ResponseEntity<List<Course>> deleteAllCoursesOfStudent(@PathVariable(value = "studentId") Long studentId) {
+
         if (!studentRepository.existsById(studentId)) {
+            logger.warn("Not found Student with id = {}", studentId);
             throw new ResourceNotFoundException("Not found Student with id = " + studentId);
         }
 
+
         courseRepository.deleteByStudentId(studentId);
+
+        logger.info("All courses deleted for student with id = {}", studentId);
+
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+
     }
 }
