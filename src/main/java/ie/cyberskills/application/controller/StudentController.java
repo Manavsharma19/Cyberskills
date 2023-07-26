@@ -29,10 +29,11 @@ public class StudentController {
     public ResponseEntity<List<Student>> getAllStudents(@RequestParam(required = false) String studentName) {
         List<Student> students = new ArrayList<Student>();
 
-        if (studentName == null)
-           studentRepository.findAll().forEach(students::add);
-        else
+        if (studentName == null){
+            studentRepository.findAll().forEach(students::add);
+        }else{
             studentRepository.findByStudentNameContaining(studentName).forEach(students::add);
+        }
         if (students.isEmpty()){
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
