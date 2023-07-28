@@ -4,9 +4,8 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0" />
-    <title>CyberSkills - Home | Public College</title>
-    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="/css/style.css" crossorigin="anonymous">
+    <title>CyberSkills - Student | Public College</title>
+
     <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
@@ -25,34 +24,59 @@
 
     <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
-            </li>
             <li class="nav-item">
-                <a class="nav-link" href="/students">Browse Students</a>
+                <a class="nav-link" href="/">Home</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/students">Browse Students <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/manager">Manage Courses</a>
             </li>
-<!--            <li class="nav-item">-->
-<!--                <a class="nav-link" th:href="@{/courses}">Courses</a>-->
-<!--            </li>-->
-<!--            <li class="nav-item">-->
-<!--                <a class="nav-link" th:href="@{/courses/new}">Add</a>-->
-<!--            </li>-->
+        </ul>
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="/logout">Logout</a>
+            </li>
         </ul>
     </div>
 </nav>
+
 <!--<div th:replace="fragments/header :: header"></div>-->
 
 <main role="main" class="container">
 
     <div class="starter-template">
-        <h1>Public College</h1>
-        <p class="lead">Welcome to the Public College. You are free to visit this page since it is not protected.</p>
+        <h1>Hello <span th:text="${name}"></span></h1>
+        <p class="lead">This page is protected. You have member privileges, so you can browse the students.</p>
     </div>
 
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Student Name</th>
+            <th scope="col">Student Address</th>
+            <th scope="col">Student Phone</th>
+            <th scope="col">Student Email</th>
+            <th scope="col">Join Courses</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="student : ${students}">
+            <td th:text="${student.id}"></td>
+            <td th:text="${student.studentName}"></td>
+            <td th:text="${student.address}"></td>
+            <td th:text="${student.phoneNumber}"></td>
+            <td th:text="${student.studentEmail}"></td>
+            <td th:text="${student.joinCourses}"></td>
+        </tr>
+        </tbody>
+    </table>
+
 </main><!-- /.container -->
+
 <div th:replace="fragments/footer :: footer"></div>
 
 <!-- Scripts -->

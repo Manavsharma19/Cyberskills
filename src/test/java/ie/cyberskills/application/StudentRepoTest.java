@@ -32,8 +32,8 @@ class StudentRepoTest {
 		//Using List to mock a database
         List<Student> students = new ArrayList<>();
 		//Making to students to be added to the list
-        students.add(new Student("Maksims Kazoha", "9 inis allain Bandon", "086 394 5665", joinCourses));
-        students.add(new Student("Will Smith", "6969 main st bandon", "086 283 3931", joinCourses));
+        students.add(new Student(1,"Maksims Kazoha", "9 inis allain Bandon", "086 394 5665","max@gmail.com", joinCourses));
+        students.add(new Student(2,"Will Smith", "6969 main st bandon", "086 283 3931", "max@gmail.com",joinCourses));
 		//We use the mocked repository and find join courses by using list as database and checking by join courses
         when(studentRepository.findByJoinCourses(joinCourses)).thenReturn(students);
 		//We check if the repository contains students with joinCourses as true and store it in result
