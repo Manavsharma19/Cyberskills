@@ -4,7 +4,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0" />
-    <title>CyberSkills - Student | Public College</title>
+    <title>CyberSkills - student | Public College</title>
 
     <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
@@ -15,6 +15,7 @@
     <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
 </head>
 <body>
+
 
 <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
     <a class="navbar-brand" href="#">Public College</a>
@@ -28,61 +29,143 @@
                 <a class="nav-link" href="/">Home</a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="/students">Browse Students <span class="sr-only">(current)</span></a>
+                <a class="nav-link" th:href="@{/students}">Browse Students<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/manager">Manage Courses</a>
             </li>
+<!--            <li class="nav-item">-->
+<!--                <a class="nav-link" th:href="@{/courses/new}">Add</a>-->
+<!--            </li>-->
+<!--            <li class="nav-item">-->
+<!--                <a class="nav-link" th:href="@{/students/new}">Add</a>-->
+<!--            </li>-->
         </ul>
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
                 <a class="nav-link" href="/logout">Logout</a>
             </li>
         </ul>
+
     </div>
 </nav>
 
 <!--<div th:replace="fragments/header :: header"></div>-->
 
-<main role="main" class="container">
+<div class="container-fluid" style="max-width: 900px; margin: 0 auto;">
+    <h2 class="text-center">students</h2>
 
-    <div class="starter-template">
-        <h1>Hello <span th:text="${name}"></span></h1>
-        <p class="lead">This page is protected. You have member privileges, so you can browse the students.</p>
+    <div th:if="${message != null}" class="alert alert-success alert-dismissible fade show text-center message"
+         role="alert">
+        [[${message}]]
+        <button type="button" class="close btn-sm" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
     </div>
 
-    <table class="table">
-        <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">Student Name</th>
-            <th scope="col">Student Address</th>
-            <th scope="col">Student Phone</th>
-            <th scope="col">Student Email</th>
-            <th scope="col">Join Courses</th>
-        </tr>
-        </thead>
+    <div class="my-3">
+        <form th:action="@{/students}">
+            <div class="row d-flex">
+                <div class="col-md-6 mt-2">
+                    <div class="search">
+                        <i class="fa fa-search"></i>
+                        <input id="keyword" type="search" name="keyword" th:value="${keyword}" required class="form-control"
+                               placeholder="Enter keyword">
+                        <button type="submit" class="btn btn-secondary">Search</button>
+                    </div>
+                </div>
+                <div class="col-md-6 mt-2">
+                    <button id="btnClear" class="btn btn-info">Clear</button>
+                </div>
+            </div>
+        </form>
+    </div>
 
-        <tbody>
-        <tr th:each="student : ${students}">
-            <td th:text="${student.id}"></td>
-            <td th:text="${student.studentName}"></td>
-            <td th:text="${student.address}"></td>
-            <td th:text="${student.phoneNumber}"></td>
-            <td th:text="${student.studentEmail}"></td>
-            <td th:text="${student.joinCourses}"></td>
-        </tr>
-        </tbody>
-    </table>
+    <div th:if="${students.size() > 0}">
+        <table class="table table-hover table-responsive-xl">
+            <thead class="thead-light">
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Name</th>
+                <th scope="col">Address</th>
+                <th scope="col">Phone Number</th>
+                <th scope="col">E-mail</th>
+                <th scope="col">Join Courses</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="student : ${students}">
+                <th scope="row">[[${student.id}]]</th>
+                <td>[[${student.studentName}]]</td>
+                <td>[[${student.address}]]</td>
+                <td>[[${student.phoneNumber}]]</td>
+                <td>[[${student.studentEmail}]]</td>
+                <td>
+                    <a th:if="${student.joinCourses == true}" class="fa-regular fa-square-check"
+                       th:href="@{'/students/' + ${student.id} + '/joinCourses/false'}" title="Disable this student"></a>
+                    <a th:if="${student.joinCourses == false}" class="fa-regular fa-square icon-dark"
+                       th:href="@{'/students/' + ${student.id} + '/joinCourses/true'}" title="Enable this student"></a>
+                </td>
+                <td>
+                    <a th:href="@{'/students/' + ${student.id}}" title="Edit this student"
+                       class="fa-regular fa-pen-to-square icon-dark"></a>
+                    &nbsp;
+                    <a th:href="@{'/students/delete/' + ${student.id}}" th:studentTitle="${student.studentName}" id="btnDelete"
+                       title="Delete this student" class="fa-regular fa-trash-can icon-dark btn-delete"></a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 
-</main><!-- /.container -->
+    <div class="" th:unless="${students.size() > 0}">
+        <span>No students found!</span>
+    </div>
+</div>
+
+<div class="modal fade text-center" id="confirmModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Delete Confirmation</h5>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <span id="confirmText"></span>
+            </div>
+
+            <div class="modal-footer">
+                <a type="button" id="yesBtn" class="btn btn-danger">Yes</a>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div th:replace="fragments/footer :: footer"></div>
 
-<!-- Scripts -->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".btn-delete").on("click", function (e) {
+            e.preventDefault();
+            link = $(this);
+
+            studentName = link.attr("studentName");
+            $("#yesBtn").attr("href", link.attr("href"));
+            $("#confirmText").html("Do you want to delete the student \<strong\>" + studentName + "\<\/strong\>?");
+            $("#confirmModal").modal();
+        });
+
+        $("#btnClear").on("click", function (e) {
+            e.preventDefault();
+            $("#keyword").text("");
+            window.location = "[[@{/students}]]";
+        });
+    });
+</script>
 
 </body>
 </html>

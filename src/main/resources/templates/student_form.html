@@ -35,7 +35,7 @@
                 <a class="nav-link" th:href="@{/courses}">Courses</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" th:href="@{/courses/new}">Add Courses<span class="sr-only">(current)</span></a>
+                <a class="nav-link" th:href="@{/students/new}">Add Students<span class="sr-only">(current)</span></a>
             </li>
         </ul>
         <ul class="navbar-nav ml-auto">
@@ -54,40 +54,49 @@
     <h2 class="text-center">[[${pageTitle}]]</h2>
 
     <div class="my-3">
-        <form th:action="@{/courses/save}" method="post" enctype="multipart/form-data" th:object="${course}"
+        <form th:action="@{/students/save}" method="post" enctype="multipart/form-data" th:object="${student}"
               style="max-width: 550px; margin: 0 auto">
 
             <input type="hidden" th:field="*{id}" />
 
             <div class="p-3">
                 <div class="form-group row">
-                    <label class="col-sm-3 col-form-label" for="title">Title</label>
+                    <label class="col-sm-3 col-form-label" for="studentName">Name</label>
                     <div class="col-sm-9">
-                        <input type="text" th:field="*{courseName}" required minlength="2" maxlength="128" class="form-control"
-                               id="title" />
+                        <input type="text" th:field="*{studentName}" required minlength="2" maxlength="128" class="form-control"
+                               id="studentName" />
                     </div>
                 </div>
 
                 <div class="form-group row">
-                    <label class="col-sm-3 col-form-label" for="description">Description</label>
+                    <label class="col-sm-3 col-form-label" for="address">Address</label>
                     <div class="col-sm-9">
-                        <input type="text" th:field="*{courseDescription}" minlength="2" maxlength="256" class="form-control"
-                               id="description" />
+                        <input type="text" th:field="*{address}" minlength="2" maxlength="256" class="form-control"
+                               id="address" />
+                    </div>
+
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label" for="phoneNumber">Phone Number</label>
+                    <div class="col-sm-9">
+                        <input type="tel" th:field="*{phoneNumber}" minlength="2" maxlength="256" class="form-control"
+                               id="phoneNumber" />
+                    </div>
+
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label" for="email">E-mail</label>
+                    <div class="col-sm-9">
+                        <input type="email" step="1" th:field="*{studentEmail}" required min="1"
+                               class="form-control" id="email" />
                     </div>
                 </div>
 
                 <div class="form-group row">
-                    <label class="col-sm-3 col-form-label" for="level">Level</label>
+                    <label class="col-sm-3 form-check-label" for="joinCourses">Join Courses</label>
                     <div class="col-sm-9">
-                        <input type="number" step="1" th:field="*{courseLevel}" required min="1"
-                               class="form-control" id="level" />
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <label class="col-sm-3 form-check-label" for="published">Published</label>
-                    <div class="col-sm-9">
-                        <input type="checkbox" th:field="*{published}" />
+                        <input type="checkbox" th:field="*{joinCourses}" />
                     </div>
                 </div>
 

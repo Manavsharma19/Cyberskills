@@ -1,6 +1,10 @@
 package ie.cyberskills.application.entity;
 import org.springframework.stereotype.Component;
 
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+
 
 //package ie.cyberskills.application.entity;
 //
@@ -79,14 +83,27 @@ import org.springframework.stereotype.Component;
 
 
 
+
+import javax.persistence.*;
 @Component
+
+@Entity
+@Table(name = "student")
 public class Student {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO, generator="seq")
     private Integer id;
+    @Column(name = "studentName", nullable = false)
     private String studentName;
+
+    @Column(name = "address")
     private String address;
+    @Column(name = "phoneNumber")
     private String phoneNumber;
+    @Column(name = "studentEmail")
     private String studentEmail;
-    private Boolean joinCourses;
+    @Column(name = "joinCourses")
+    private boolean joinCourses;
 
 
     public Student() {}
@@ -99,6 +116,7 @@ public class Student {
         this.studentEmail = studentEmail;
         this.joinCourses = joinCourses;
     }
+
 
     public Integer getId() {
         return id;
@@ -146,5 +164,11 @@ public class Student {
 
     public void setJoinCourses(Boolean joinCourses) {
         this.joinCourses = joinCourses;
+    }
+
+    @Override
+    public String toString() {
+        return "Student [id=" + id + ", Name=" + studentName + ", Address=" + address + ", Phone=" + phoneNumber +
+                ", Email=" + studentEmail + ", Join Courses=" + joinCourses + "]";
     }
 }
