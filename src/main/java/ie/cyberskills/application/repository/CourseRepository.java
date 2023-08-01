@@ -36,4 +36,5 @@ public interface CourseRepository extends JpaRepository<Course, Integer> {
     @Query("UPDATE Course t SET t.published = :published WHERE t.id = :id")
     @Modifying
     public void updatePublishedStatus(Integer id, boolean published);
+
 }

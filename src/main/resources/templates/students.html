@@ -32,7 +32,7 @@
                 <a class="nav-link" th:href="@{/students}">Browse Students<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/manager">Manage Courses</a>
+                <a class="nav-link" href="/manager">Manage students</a>
             </li>
 <!--            <li class="nav-item">-->
 <!--                <a class="nav-link" th:href="@{/courses/new}">Add</a>-->
@@ -53,7 +53,7 @@
 <!--<div th:replace="fragments/header :: header"></div>-->
 
 <div class="container-fluid" style="max-width: 900px; margin: 0 auto;">
-    <h2 class="text-center">students</h2>
+    <h2 class="text-center">Students</h2>
 
     <div th:if="${message != null}" class="alert alert-success alert-dismissible fade show text-center message"
          role="alert">
@@ -153,9 +153,9 @@
             e.preventDefault();
             link = $(this);
 
-            studentName = link.attr("studentName");
+            studentTitle = link.attr("studentTitle");
             $("#yesBtn").attr("href", link.attr("href"));
-            $("#confirmText").html("Do you want to delete the student \<strong\>" + studentName + "\<\/strong\>?");
+            $("#confirmText").html("Do you want to delete the student \<strong\>" + studentTitle + "\<\/strong\>?");
             $("#confirmModal").modal();
         });
 

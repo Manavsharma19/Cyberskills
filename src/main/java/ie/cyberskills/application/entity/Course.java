@@ -155,5 +155,4 @@ public class Course {
         return "Course [id=" + id + ", title=" + courseName + ", description=" + courseDescription + ", level=" + courseLevel
                 + ", published=" + published + "]";
     }
-
 }
