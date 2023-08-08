@@ -7,17 +7,14 @@ import org.springframework.stereotype.Repository;
 import javax.transaction.Transactional;
 import java.util.List;
 
+import ie.cyberskills.application.entity.Course;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-//package ie.cyberskills.application.repository;
-//
-//import ie.cyberskills.application.entity.Course;
-//import org.springframework.data.jpa.repository.JpaRepository;
-//import org.springframework.stereotype.Repository;
-//
-//import javax.transaction.Transactional;
-//import java.util.List;
-//
-//
+import javax.transaction.Transactional;
+import java.util.List;
+
+
 //@Repository
 //@Transactional
 //public interface CourseRepository extends JpaRepository<Course, Long> {
@@ -25,6 +22,8 @@ import java.util.List;
 //    List<Course> findByStudentId(Long studentId);
 //
 //    void deleteByStudentId(Long studentId);
+//
+//
 //}
 
 

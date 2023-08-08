@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Guest Page</title>
+</head>
+<body>
+<h1>Welcome, Guest User!</h1>
+<table>
+  <thead>
+  <tr>
+    <th> Module ID </th>
+    <th> Module Name </th>
+    <th> Description </th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="module : ${modules}">
+    <td th:text="${module.moduleId}"></td>
+    <td th:text="${module.moduleName}"></td>
+    <td th:text="${module.description}"></td>
+  </tr>
+  </tbody>
+</table>
+</body>
+</html>
