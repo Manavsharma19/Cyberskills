@@ -31,6 +31,7 @@ import java.util.List;
 @Transactional
 public interface CourseRepository extends JpaRepository<Course, Integer> {
     List<Course> findByCourseNameContainingIgnoreCase(String keyword);
+    List<Course> findAll();
 
     @Query("UPDATE Course t SET t.published = :published WHERE t.id = :id")
     @Modifying

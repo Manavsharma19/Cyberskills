@@ -8,16 +8,16 @@
 <table>
   <thead>
   <tr>
-    <th> Module ID </th>
-    <th> Module Name </th>
-    <th> Description </th>
+    <th>Course ID</th>
+    <th>Course Name</th>
+    <th>Description</th>
   </tr>
   </thead>
   <tbody>
-  <tr th:each="module : ${modules}">
-    <td th:text="${module.moduleId}"></td>
-    <td th:text="${module.moduleName}"></td>
-    <td th:text="${module.description}"></td>
+  <tr th:each="course : ${courses}">
+    <td th:text="${course.id}"></td>
+    <td th:text="${course.courseName}"></td>
+    <td th:text="${course.courseDescription}"></td>
   </tr>
   </tbody>
 </table>
